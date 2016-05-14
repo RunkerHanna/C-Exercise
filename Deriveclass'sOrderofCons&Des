@@ -1,0 +1,55 @@
+//派生类，成员对象，基类的构造和析构函数的调用顺序// 
+#include <iostream>
+using namespace std;
+
+class Skill {
+	int *nSkill;
+ 	public:
+ 		Skill(int n) {//这是在派生类中成员对象它的类 
+ 			nSkill = new int; //常犯错误 
+ 			*nSkill = n;//赋值操作 
+			cout << "member object "<< (*nSkill) <<" constructed" << endl; 
+ 		}	
+ 		~Skill(){
+ 			cout << "member object "<< (*nSkill) <<" destructed" << endl;
+ 			delete nSkill;
+ 		} 
+};
+
+class Bug {//Base class 
+	private :
+		int nLegs; int nColor;
+	public:
+		int nType;
+		Bug (int legs, int color){
+			nLegs = legs;
+			nColor = color;
+			cout << "Bug object constructed" << endl;
+ 		}
+		~Bug (){
+			cout << "Bug object destructed" << endl;
+ 		} 
+		void PrintBug () { };
+};
+
+class FlyBug: public Bug {
+	int nWings;
+	Skill sk1, sk2;//这是成员对象的顺序来源 （成员对象就是一个类中有其他类的对象作为成员） 
+	public:
+		FlyBug(int legs, int color, int wings);
+		~FlyBug(){
+			cout << "FlyBug object destructed" << endl;
+		};//声明时候需要“；” 
+};
+
+FlyBug :: FlyBug( int legs, int color, int wings)
+        : Bug(legs, color),sk2(2),sk1(1){//此处不能决定成员对象调用顺序 
+ 	nWings = wings;
+ 	cout << "FlyBug object constructed" << endl;
+}
+
+
+int main() { 
+	FlyBug flyBug(4,1,2); 
+	return 0;
+}
