@@ -1,0 +1,26 @@
+//只能调用无参构造函数 
+#include<iostream>
+using namespace std;
+class Base{
+	public:
+	Base(){
+		cout<<"one more second"<<endl;
+	}
+	Base(int q):dos(q){
+	cout<<"I have a var, and I use Dos"<<endl;
+ }
+	private:
+		int dos;
+}; 
+int main(){
+	Base *k=new Base(2);// 只一个对象可以使用参数构造函数 
+	delete k;
+	k=NULL;
+	Base *p=new Base [3];//可以没有自定义构造函数，即缺省，也可以用无参自定义函数（后者优先级大于前者） 
+	delete [] p;//!!!注意格式 
+	p=NULL; //把野指针重置为空指针 
+	int *h=new int [3];
+	delete [] h;
+	h=NULL;
+	
+}
