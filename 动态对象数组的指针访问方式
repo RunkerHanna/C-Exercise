@@ -1,0 +1,39 @@
+//动态对象数组的指针访问方法// 
+#include<iostream>
+using namespace std;
+class tail{
+	public:
+		int ll;
+		void show(){
+			cout<<"I am the class"<<endl;
+	}
+	private:
+		int i,k,j;
+		char kk,llp,dlp,ddp,oops;//以4字节对齐 
+}; 
+int main(){
+	
+	tail *p=new tail [2];
+	p->show();
+//	(*p).show();
+	(p+1)->show();
+//	(*(p+1)).show();
+	delete [] p;
+	
+	tail *h=new tail [2];
+	cout<<h<<" ## "<<h+1<<endl;//按照类里面定义的数据成员而定，数据成员决定其对象的大小 
+	cout<<&h<<" ## "<<&h+1<<endl;//相差8 
+	cout<<*(&h)<<endl;//与下面的内容相同，因为都是缺省初始化 
+	cout<<*(&h+1)<<endl; 
+	(*h).show();
+//	*h.show();注意*附近的括号 
+	delete [] p;
+	
+	int *k=new int [2];
+	*k=1;//赋值操作 
+	*(k+1)=2;
+	cout<<k[0]<<" "<<k[1]<<endl; 
+	cout<<k<<" ## "<<k+1<<endl;
+	cout<<&k<<" ## "<<&k+1<<endl;//相差2 
+	delete [] k;
+	}
