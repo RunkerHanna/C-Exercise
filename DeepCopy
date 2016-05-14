@@ -1,0 +1,38 @@
+#include <iostream>
+#include<cstring> //use strcpy function 
+using namespace std;
+class CA
+{
+public:
+	CA(int b,char* cstr){
+		a=b;
+		str=new char[b];
+		strcpy(str,cstr);
+	}
+	CA(const CA& C){
+		a=C.a;
+		str=new char[a]; //深拷贝,存在堆，浅拷贝只能使指针同指,即共用同一个空间的数据 
+		if(str!=0)
+		strcpy(str,C.str);
+	}
+	void Show(){
+	
+		cout<<str<<endl;
+}
+
+	~CA(){
+		
+		delete str;
+	}
+private:
+	int a;
+	char *str;//浅拷贝之后复制后的指针指向与前对象一样的内存空间，当前对象析构后，这个指针就成为了野指针 
+};
+
+int main()
+{
+CA A(10,(char *)"Hello!");//string to char*, it's a conversion
+CA B=A;
+B.Show();
+return 0;
+} 
