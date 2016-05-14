@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+class Shape{//抽象基类 
+	public:
+		Shape(){
+		}
+		~Shape(){
+		}
+		virtual float Get(){ //纯虚函数 
+			
+		}
+};
+class Recx:public Shape{
+	public:
+		Recx(float a,float b):aa(a),bb(b){
+		}
+		float Get(){
+			return aa*bb;
+		}
+	private:
+		float aa,bb;
+};
+class Circle:public Shape{
+	public:
+		Circle(float r):rr(r){
+		}
+		float Get(){
+			return 3.14*rr*rr;
+		}
+	private:
+		float rr;
+};
+int main(){
+	Shape *p;
+	p= new Recx(12,34);//初始化，可以分别这样初始化 
+	cout<<p->Get()<<endl;
+	delete p;
+	p=new Circle(67);
+	cout<<p->Get()<<endl;
+	delete p;
+	
+}
